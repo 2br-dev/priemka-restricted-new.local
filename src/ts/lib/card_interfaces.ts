@@ -13,8 +13,8 @@ export interface IFilterParams{
 }
 
 export interface IMinScore{
-	year: number,
-	score: number
+	Year: number,
+	Score: number
 }
 
 export interface IEducationFreeBase{

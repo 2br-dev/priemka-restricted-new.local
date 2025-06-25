@@ -200,7 +200,7 @@ class Calculator{
 
 			if(year !== null && year !== undefined){
 				score = card.SelectedBase?.MinScore.filter((val:IMinScore) => {
-					return val.year === year;
+					return val.Year === year;
 				})[0];
 			}else{
 				if(card.SelectedBase?.MinScore){
@@ -211,7 +211,7 @@ class Calculator{
 				}
 			}
 
-			return score.score
+			return score.Score
 		}
 	}
 
@@ -261,8 +261,10 @@ class Calculator{
 			let OverflowClass = "";
 			let order:number = 0;
 			if(_this.filterParams.MinScore !== null){
-				OverflowClass = card.SelectedBase?.MinScore[0].score > _this.filterParams.MinScore ? "Overflow" : "";
-				order = OverflowClass === "" ? 0 : 1;
+				if(card.SelectedBase?.MinScore.length){
+					OverflowClass = card.SelectedBase?.MinScore[0].Score > _this.filterParams.MinScore ? "overflow" : "";
+					order = OverflowClass === "" ? 0 : 1;
+				}
 			}
 
 			card.OverflowClass = OverflowClass;
@@ -310,7 +312,9 @@ class Calculator{
 				Available = Total;
 			}else{
 				Available = s.SectionContent.filter((c:ICardData) => {
-					return c.SelectedBase?.MinScore[0].score <= this.filterParams.MinScore
+					if(c.SelectedBase?.MinScore.length){
+						return c.SelectedBase?.MinScore[0].Score <= _this.filterParams.MinScore
+					}
 				}).length
 			}
 			let Indicator = "";
